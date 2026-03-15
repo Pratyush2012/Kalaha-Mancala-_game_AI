@@ -9,6 +9,7 @@ from game_engine import (
     P2_store,
     P1_pits,
     P2_pits,
+    display_board
 )
 # AI integration will be added here once the minimax player is implemented
 class KalahaCLI:
@@ -44,36 +45,36 @@ class KalahaCLI:
         print()
 
     # Display
-    def render_board(self):
-        """Print the current board in the terminal."""
-        p2_values = [self.board[i] for i in reversed(P2_pits)]
-        p2_labels = list(reversed(P2_pits))
-
-        p1_values = [self.board[i] for i in P1_pits]
-        p1_labels = list(P1_pits)
-
-        print()
-        print(f"{'=' * 58}")
-        print(f"{'Turn ' + str(self.turn_number):^58}")
-        print(f"{'=' * 58}")
-        print(" " * 20 + "Player 2 side")
-        print()
-
-        print("           " + "  ".join(f"{label:>2}" for label in p2_labels))
-        print("        +" + "---+" * 6)
-        print("        |" + "|".join(f"{value:>3}" for value in p2_values) + "|")
-
-        print("+" + "-" * 6 + "+" + "---+" * 6 + "-" * 6 + "+")
-        print(f"| S2 {self.board[P2_store]:>2} |" + " " * 25 + f"| S1 {self.board[P1_store]:>2} |")
-        print("+" + "-" * 6 + "+" + "---+" * 6 + "-" * 6 + "+")
-
-        print("        |" + "|".join(f"{value:>3}" for value in p1_values) + "|")
-        print("        +" + "---+" * 6)
-        print("           " + "  ".join(f"{label:>2}" for label in p1_labels))
-
-        print()
-        print(" " * 20 + "Player 1 side")
-        print()
+    #def render_board(self):
+    #    """Print the current board in the terminal."""
+    #    p2_values = [self.board[i] for i in reversed(P2_pits)]
+    #    p2_labels = list(reversed(P2_pits))
+#
+    #    p1_values = [self.board[i] for i in P1_pits]
+    #    p1_labels = list(P1_pits)
+#
+    #    print()
+    #    print(f"{'=' * 58}")
+    #    print(f"{'Turn ' + str(self.turn_number):^58}")
+    #    print(f"{'=' * 58}")
+    #    print(" " * 20 + "Player 2 side")
+    #    print()
+#
+    #    print("           " + "  ".join(f"{label:>2}" for label in p2_labels))
+    #    print("        +" + "---+" * 6)
+    #    print("        |" + "|".join(f"{value:>3}" for value in p2_values) + "|")
+#
+    #    print("+" + "-" * 6 + "+" + "---+" * 6 + "-" * 6 + "+")
+    #    print(f"| S2 {self.board[P2_store]:>2} |" + " " * 25 + f"| S1 {self.board[P1_store]:>2} |")
+    #    print("+" + "-" * 6 + "+" + "---+" * 6 + "-" * 6 + "+")
+#
+    #    print("        |" + "|".join(f"{value:>3}" for value in p1_values) + "|")
+    #    print("        +" + "---+" * 6)
+    #    print("           " + "  ".join(f"{label:>2}" for label in p1_labels))
+#
+    #    print()
+    #    print(" " * 20 + "Player 1 side")
+    #    print()
 
     # Input handling
     def get_player_move(self):
@@ -105,7 +106,7 @@ class KalahaCLI:
     # Turn handling
     def play_turn(self):
         """Run one full turn for the current player."""
-        self.render_board()
+        display_board(self.board)
         print(f"Player {self.current_player}'s turn")
         print("-" * 58)
 
@@ -157,7 +158,7 @@ class KalahaCLI:
         print(f"{'GAME OVER':^58}")
         print("=" * 58)
 
-        self.render_board()
+        display_board(self.board)
 
         p1_score = self.board[P1_store]
         p2_score = self.board[P2_store]
