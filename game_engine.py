@@ -66,15 +66,14 @@ def legal_moves(board, player):
             legal_moves_arr.append(pit)
     return legal_moves_arr
 
-def game_over(board):
-    """Check if the game is over (one player's pits are all empty)."""
-    for pit1, pit2 in zip(P1_pits, P2_pits):
-        if board[pit1] > 0 or board[pit2] > 0:
-            return False
-    return True
+def game_over(board): # check if the game is over (one player's pits are all empty)
+    p1_empty = all(board[pit] == 0 for pit in P1_pits)
+    p2_empty = all(board[pit] == 0 for pit in P2_pits)
+    return p1_empty or p2_empty
 
 def collect_remaining_seeds(board):
     """When the game ends, collect all remaining seeds into the last player's store."""
+    board = board[:]  # make a copy to modify
     for pit in P1_pits:
         board[P1_store] += board[pit]
         board[pit] = 0
@@ -150,6 +149,12 @@ def winner(board):
     else:
         return 0  # tie
 
+def utility(board):
+    """Terminal utility from Player 1's perspective. 
+    Only called after the game ends (use game_over to check)."""
+    b = collect_remaining_seeds(board)
+    return b[P1_store] - b[P2_store]
+
 
 # Display
 def display_board(board):
@@ -167,7 +172,7 @@ def display_board(board):
     print("-" * 30)
 
 
-
+# Just for testing the game engine
 if __name__ == "__main__":
     board = initial_board()
     display_board(board)
