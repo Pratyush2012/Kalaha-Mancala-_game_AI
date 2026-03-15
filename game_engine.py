@@ -165,11 +165,19 @@ def display_board(board):
     p2_row = [board[i] for i in reversed(P2_pits)]   # display 12 → 7
     p1_row = [board[i] for i in P1_pits]             # display 0 → 5
 
-    print(f"Player 2 Store: {board[P2_store]}")
-    print("Player 2 Pits: ", p2_row)
-    print("Player 1 Pits: ", p1_row)
-    print(f"Player 1 Store: {board[P1_store]}")
-    print("-" * 30)
+    print((25 * "-") + " Game Board " + (25 * "-"))
+    print()
+    print("                        Player 2")
+    print(f"P2 store|" + "".join(f"  {i:2d} |" for i in reversed(range(7, 13))))
+    print ("-" * 53)
+    print(f"|  {board[P2_store]:2d}   |" + "".join(f"  {v:2d} |" for v in p2_row) +  "       |")
+    print(f"|" + " " * 7 + "|" + "-" * 5 + "|" + "-" * 5 + "|" + "-" * 5 + "|" + "-" * 5 + "|" + "-" * 5 + "|" + "-" * 5 + "|" + " " * 7 + "|")
+    print(f"|       |" + "".join(f"  {v:2d} |" for v in p1_row) + f"  {board[P1_store]:2d}   |")
+    print("-" * 53)
+    print(f"        |" + "".join(f"  {i:2d} |" for i in (range(0, 6))) + "P1 store")
+    print("                         Player 1")
+    print()
+    print((63 * "-"))
 
 
 # Just for testing the game engine
