@@ -15,12 +15,12 @@ from minimax_agent import MinimaxAgent
 def main():
 
     board = initial_board()
-    player = 1
+    player = 1  
 
     agent = MinimaxAgent()
 
     print("Kalaha: Human vs Minimax")
-    print("Player 1 = AI")
+    print("Player 1 = AI")   
     print("Player 2 = Human")
 
     while not game_over(board):
@@ -28,7 +28,7 @@ def main():
         display_board(board)
         moves = legal_moves(board, player)
 
-        if player == 1:
+        if player == 2:   # change to 2 if you want human to start first, 1 is the AI first
             print("AI thinking...")
 
             agent.evaluatedNodes = 0
@@ -53,11 +53,11 @@ def main():
                 print("Invalid input")
                 continue
 
-        if action not in moves:
+        if action not in moves:   
             print("Invalid move")
             continue
 
-        board, player, extra_turn = make_move(board, player, action)
+        board, player, extra_turn = make_move(board, player, action) # checks
 
         if extra_turn:
             print("Extra turn!")

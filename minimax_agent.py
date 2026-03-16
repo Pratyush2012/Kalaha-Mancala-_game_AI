@@ -18,16 +18,16 @@ class MinimaxAgent:
 
         self.evaluatedNodes += 1
 
-        # Terminal node
+        # Terminal node checks if done or depth limit reached
         if depth == 0 or game_over(state):
             return utility(state), None
 
-        actions = legal_moves(state, player)
+        actions = legal_moves(state, player) # get legal moves for current player
 
         best_action = None
 
         # Maximizing player
-        if player == 1:
+        if player == 1:    # player 1 is the maximizing player, trying to maximize the score from their perspective
 
             max_eval = float("-inf")
 
@@ -46,7 +46,7 @@ class MinimaxAgent:
         # Minimizing player
         else:
 
-            min_eval = float("inf")
+            min_eval = float("inf") #looks for lowest score for player 1, which is the highest score for player 2
 
             for action in actions:
 
