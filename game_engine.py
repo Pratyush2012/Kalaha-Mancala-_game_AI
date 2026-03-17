@@ -1,8 +1,5 @@
 """
 Kalha game engine.
-02180 Introduction to AI, Spring 2026
-
-This file contains the main game engine for Kalha, with no game AI code.
 
 Board layout (indices):
     Player 2 pits:  [12][11][10][ 9][ 8][ 7]   Store: [13]
@@ -28,7 +25,7 @@ P2_pits = [7, 8, 9, 10, 11, 12]
 def initial_board():
     """
     Returns the starting board state.
-    All 12 pits contain SEEDS_PER_PIT seeds; both stores start at 0.
+    All 12 pits contain 4 seeds; both stores start at 0.
     """
     board = [Seeds_per_pit] * Board_size
     board[P1_store] = 0
@@ -50,7 +47,7 @@ def opponent(player):
 
 def opposite_pit(pit):
     """
-    Return the pit directly across the board.
+    Return the pit directly across the board (used for capturing rule)
     e.g. opposite_pit(0) = 12, opposite_pit(5) = 7
     """
     return 12 - pit
@@ -98,9 +95,9 @@ def make_move(board, player, pit):
         extra_turn: True if the player gets an extra turn, False otherwise
     """
 
-    b = board[:]  # make a copy of the board to modify (so we don't change the original board in place)
-    seeds = b[pit]  # number of seeds to sow
-    b[pit] = 0  # pick up the seeds from the chosen pit
+    b = board[:]  # making a copy of the board to modify (so we don't change the original board in place)
+    seeds = b[pit]  
+    b[pit] = 0  # clear the seeds from the chosen pit
 
     player_store_index = player_store(player)
     opponent_store_index = player_store(opponent(player))
@@ -109,7 +106,7 @@ def make_move(board, player, pit):
     # Sowing the seeds
     current_index = pit
     while seeds > 0:
-        current_index = (current_index + 1) % Board_size  # move to the next pit in a circular way
+        current_index = (current_index + 1) % Board_size 
 
         if current_index == opponent_store_index:
             continue
@@ -123,10 +120,9 @@ def make_move(board, player, pit):
     # Check for capturing the rest of opponent's seeds
     if (current_index in player_pits_indices) and (b[current_index] == 1):  # last seed lands in an empty pit on player's own side
         opposite_index = opposite_pit(current_index)
-        if b[opposite_index] > 0:  # There are seeds in the opposite pit, we can capture
-            b[player_store_index] += b[opposite_index] + 1  # we take all the seeds and place them in the player's store
-
-            #clearing players and opponents pits
+        if b[opposite_index] > 0: 
+            b[player_store_index] += b[opposite_index] + 1  
+            
             b[current_index] = 0 
             b[opposite_index] = 0 
     
