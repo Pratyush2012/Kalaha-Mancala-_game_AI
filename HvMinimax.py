@@ -41,7 +41,7 @@ def main():
         display_board(board)
         moves = legal_moves(board, player)
 
-        if player == 1:   # change to 2 if you want human to start first, 1 is the AI first
+        if player == 2:   # change to 2 if you want human to start first, 1 is the AI first
             print("AI thinking...")
 
             agent.evaluatedNodes = 0
