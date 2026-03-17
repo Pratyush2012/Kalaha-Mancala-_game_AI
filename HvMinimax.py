@@ -1,4 +1,4 @@
-
+import argparse
 from game_engine import (
     initial_board,
     legal_moves,
@@ -14,6 +14,19 @@ from minimax_agent import MinimaxAgent
 
 def main():
 
+    parser = argparse.ArgumentParser(description="Kalaha Human vs Minimax")
+    parser.add_argument(
+        "-d",
+        "--depth",
+        type=int,
+        default=6,
+        help="Search depth for minimax (default: 6)"
+    )
+
+    args = parser.parse_args()
+    depth = args.depth
+
+
     board = initial_board()
     player = 1  
 
@@ -28,12 +41,12 @@ def main():
         display_board(board)
         moves = legal_moves(board, player)
 
-        if player == 2:   # change to 2 if you want human to start first, 1 is the AI first
+        if player == 1:   # change to 2 if you want human to start first, 1 is the AI first
             print("AI thinking...")
 
             agent.evaluatedNodes = 0
 
-            value, action = agent.minimax(board.copy(), depth=6, player=player)   # Adjust depth as needed
+            value, action = agent.minimax(board.copy(), depth, player=player)   
 
             print(
                 "Agent evaluated",
