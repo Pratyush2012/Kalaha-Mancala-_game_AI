@@ -16,7 +16,7 @@ py -m pip install -r requirements.txt
 
 
 ### Human vs AI
-can be run with different -d would suggest not to go over 10
+can be run with different depth (-d) would suggest not to go over 10 based on time runs without AB pruning
 ```bash
        py .\HvMinimax.py -d 5
 ```
