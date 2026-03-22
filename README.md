@@ -16,7 +16,7 @@ py -m pip install -r requirements.txt
 
 
 ### Human vs AI
-Use `-d/--depth` to control search depth and `--agent` to choose the algorithm.
+Use `-d/--depth` to control search depth and `--agent` to choose the algorithm. Would suggest not to go over depth of 10 based on time runs without AB pruning
 
 Examples:
 ```bash
