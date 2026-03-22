@@ -38,11 +38,9 @@ def player_pits(player):
     return P1_pits if player == 1 else P2_pits
 
 def player_store(player):
-    """Return the store index of the given player."""
     return P1_store if player == 1 else P2_store
 
 def opponent(player):
-    """Return the opponent of the given player."""
     return 2 if player == 1 else 1
 
 def opposite_pit(pit):
@@ -56,14 +54,13 @@ def opposite_pit(pit):
 
 # Game rules (contains the logic for making a move, checking for game end, etc.)
 def legal_moves(board, player):
-    """Return a list of legal moves (pit indices) for the given player."""
     legal_moves_arr = []
     for pit in player_pits(player):
         if board[pit] > 0:
             legal_moves_arr.append(pit)
     return legal_moves_arr
 
-def game_over(board): # check if the game is over (one player's pits are all empty)
+def game_over(board): # check if one player's pits are all empty
     p1_empty = all(board[pit] == 0 for pit in P1_pits)
     p2_empty = all(board[pit] == 0 for pit in P2_pits)
     return p1_empty or p2_empty
@@ -132,11 +129,9 @@ def make_move(board, player, pit):
 
 # Score calculation (after the game ends)
 def calculate_score(board):
-    """Calculate the score for both players based on the current board state."""
     return board[P1_store], board[P2_store]
 
 def winner(board):
-    """Determine the winner based on the current board state."""
     score_p1, score_p2 = calculate_score(board)
     if score_p1 > score_p2:
         return 1
@@ -154,9 +149,6 @@ def utility(board):
 
 # Display
 def display_board(board):
-    """
-    Printing the board in the terminal
-    """
 
     p2_row = [board[i] for i in reversed(P2_pits)]   # display 12 → 7
     p1_row = [board[i] for i in P1_pits]             # display 0 → 5

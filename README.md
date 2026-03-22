@@ -16,9 +16,12 @@ py -m pip install -r requirements.txt
 
 
 ### Human vs AI
-can be run with different depth (-d) would suggest not to go over 10 based on time runs without AB pruning
+Use `-d/--depth` to control search depth and `--agent` to choose the algorithm.
+
+Examples:
 ```bash
-       py .\HvMinimax.py -d 5
+python HvMinimax.py -d 5 --agent minimax
+python HvMinimax.py -d 7 --agent ab
 ```
 
 ### AI vs AI (benchmarking)
@@ -33,11 +36,11 @@ can be run with different depth (-d) would suggest not to go over 10 based on ti
 
 ```
          Player 2
-  +----+--+--+--+--+--+--+----+
-  | S2 | 12 11 10  9  8  7 | S1 |
-  +----+--+--+--+--+--+--+----+
-  |    |  0  1  2  3  4  5 |    |
-  +----+--+--+--+--+--+--+----+
+  +----+--+--+--+--+--+--+--+----+
+  | S2 | 12 11 10  9  8  7  |    |
+  |    +--+--+--+--+--+--+--+    |
+  |    |  0  1  2  3  4  5  | S1 |
+  +----+--+--+--+--+--+--+--+----+
   Pit#:  0   1   2   3   4   5
          Player 1
 ```
