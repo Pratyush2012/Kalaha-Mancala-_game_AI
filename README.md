@@ -20,8 +20,8 @@ Use `-d/--depth` to control search depth and `--agent` to choose the algorithm. 
 
 Examples:
 ```bash
-python HvMinimax.py -d 5 --agent minimax
-python HvMinimax.py -d 7 --agent ab
+python HvAI.py -d 5 --agent minimax
+python HvAI.py -d 7 --agent ab
 ```
 
 ### AI vs AI (benchmarking)
